@@ -24,7 +24,7 @@ public class CarroTest {
 		
 		int gear = myCar.whichGear(vel);
 		
-		System.out.printf("%n A marcha adequada para %d km/h é %d marcha %n", gear, vel);
+		System.out.printf("%n A marcha adequada para %d km/h é %dª marcha %n", vel, gear);
 		
 		input.close();
 	}
