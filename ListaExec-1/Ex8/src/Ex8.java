@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Ex8 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Locale.setDefault(new Locale("en", "US"));
 		Scanner scan = new Scanner(System.in);
 		
@@ -13,6 +12,7 @@ public class Ex8 {
 		aux2 = 0; 
 		System.out.print("Informe qual posição da sequência de Fibonacci deseja: ");
 		int n = scan.nextInt();
+		scan.close();
 		if (n == 1) {
 			System.out.print(">> " + aux2); 
 		} else if (n == 2) {
@@ -24,7 +24,7 @@ public class Ex8 {
 		    }
 			System.out.print(">> s" + aux1);    
 		}
-		scan.close();
+		
 	}
 
 }

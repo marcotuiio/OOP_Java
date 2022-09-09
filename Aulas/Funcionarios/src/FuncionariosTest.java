@@ -10,10 +10,10 @@ public class FuncionariosTest {
 		Funcionarios f3 = new Funcionarios("Marta", 12300);
 		Funcionarios f4 = new Funcionarios("Kleber", 1500);
 		
-		Funcionarios.setTicket(125);
-		System.out.printf("%n Vale refeição inicial %d %n", Funcionarios.getTicket());
+		Funcionarios.setTicket(200);
+		System.out.printf("%n Vale refeição inicial %d %n%n", Funcionarios.getTicket());
 		
-		Funcionarios.adjustTicket(12);
+		Funcionarios.adjustTicket(10);
 		
 		System.out.printf("Funcionário %s Renda %d Vale %d %n", f1.getName(), f1.getIncome(), Funcionarios.getTicket());
 		System.out.printf("Funcionário %s Renda %d Vale %d %n", f2.getName(), f2.getIncome(), Funcionarios.getTicket());
