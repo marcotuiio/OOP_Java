@@ -20,6 +20,22 @@ public class Bomba {
 	public ArrayList<Fuel> getFuel() {
 		return this.fuels;
 	}
+	
+	public double getPriceLiter(int c, int l) {
+		ArrayList<Fuel> a = this.getFuel();
+		Fuel f = a.get(c);
+		double p = f.getPrice();
+		double bill = p * l;
+		return bill;
+	}
+	
+	public double getLiterPrice(int c, int bill) {
+		ArrayList<Fuel> a = this.getFuel();
+		Fuel f = a.get(c);
+		double price = f.getPrice();
+		double litro = bill / price;
+		return litro;
+	}
 }
 
 	
