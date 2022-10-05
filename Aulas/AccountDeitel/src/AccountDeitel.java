@@ -10,16 +10,14 @@ public class AccountDeitel {
 
       // validate that the balance is greater than 0.0; if it's not,
       // instance variable balance keeps its default initial value of 0.0
-      if (balance.compareTo(BigDecimal.ZERO) > 0) { // if the balance is valid
-         this.balance = balance; // assign it to instance variable balance
-      }
+     this.balance = balance; // assign it to instance variable balance   
    }
 
    // method that deposits (adds) only a valid amount to the balance
-   public void deposit(BigDecimal depositAmount) {      
-      if (balance.compareTo(BigDecimal.ZERO) > 0) { // if the depositAmount is valid
-         balance = balance.add(depositAmount); // add it to the balance 
-      }
+   public void deposit(BigDecimal depositAmount) {  
+	   if (depositAmount.compareTo(BigDecimal.ZERO) > 0) {		   
+		   balance = balance.add(depositAmount); // add it to the balance     
+	   }
    }
 
    // method returns the account balance

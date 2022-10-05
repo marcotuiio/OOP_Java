@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class AccountTest {
    public static void main(String[] args) {
-      AccountDeitel account1 = new AccountDeitel("Jane Green", new BigDecimal(50.00));
-      AccountDeitel account2 = new AccountDeitel("John Blue", new BigDecimal(-7.53)); 
+      AccountDeitel account1 = new AccountDeitel("Jane Green", BigDecimal.valueOf(50));
+      AccountDeitel account2 = new AccountDeitel("John Blue", BigDecimal.valueOf(-7.53)); 
 
       // display initial balance of each object
       System.out.printf("%s balance: $%.2f%n",
