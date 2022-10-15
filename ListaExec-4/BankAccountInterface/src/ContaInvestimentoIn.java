@@ -27,7 +27,7 @@ public class ContaInvestimentoIn implements ContaBancariaIn, Tributavel {
 	@Override
 	public BigDecimal calcularTributo(BigDecimal taxaRendimento) {
 		BigDecimal rendimento = this.saldo.multiply(taxaRendimento).divide(BigDecimal.valueOf(100));
-		BigDecimal tTrib = rendimento.multiply(BigDecimal.ONE).divide(BigDecimal.valueOf(100));
+		BigDecimal tTrib = rendimento.multiply(BigDecimal.valueOf(0.5)).divide(BigDecimal.valueOf(100));
 		System.out.println("Valor Tributo R$" + tTrib + " para " + taxaRendimento + "% e rendimento R$" + rendimento);
 		return tTrib;
 	}
@@ -43,7 +43,7 @@ public class ContaInvestimentoIn implements ContaBancariaIn, Tributavel {
 
 	@Override
 	public void depositar(BigDecimal value) {
-		this.saldo.add(value);
+		this.saldo = this.saldo.add(value);
 	}
 	
 	public void calcularNovoSaldo(BigDecimal taxa) {
@@ -65,6 +65,7 @@ public class ContaInvestimentoIn implements ContaBancariaIn, Tributavel {
 			}
 		}
 		System.out.println("Nenhuma conta com esse registro foi encontrada, encerrando procedimento\n");
+		System.exit(0);
 		return null; // erro não encontrou a conta
 	}
 

@@ -57,6 +57,7 @@ public class ContaPoupancaIn implements ContaBancariaIn {
 			}
 		}
 		System.out.println("Nenhuma conta com esse registro foi encontrada, encerrando procedimento\n");
+		System.exit(0);
 		return null; // erro não encontrou a conta
 	}
 

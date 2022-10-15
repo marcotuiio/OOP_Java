@@ -8,12 +8,14 @@ public class MainContaBancariaIn {
 		Scanner input = new Scanner(System.in);
 		int op = 1;
 		int type;
-		ContaBancariaIn atualC = null;
-		ContaBancariaIn atualP = null;
-		ContaBancariaIn atualI = null;
+		ContaCorrenteIn atualC = null;
+		ContaPoupancaIn atualP = null;
+		ContaInvestimentoIn atualI = null;
 		ArrayList<ContaCorrenteIn> corrente = new ArrayList<ContaCorrenteIn>();
 		ArrayList<ContaPoupancaIn> poupanca = new ArrayList<ContaPoupancaIn>();
 		ArrayList<ContaInvestimentoIn> invest = new ArrayList<ContaInvestimentoIn>();
+		// ArrayList<ContaBancariaIn> listaContas = new ArrayList<ContaBancariaIn>();
+		// ContaBancariaIn generic = null
 		
 		System.out.println("--- Olá Cliente, bem vindo ao Banco de Westeros ---\n");
 		
@@ -24,7 +26,7 @@ public class MainContaBancariaIn {
 			System.out.println("3 - Atualizar conta poupança com um dado rendimento");
 			System.out.println("4 - Depositar um valor na conta (poupança, corrente ou investimento)");
 			System.out.println("5 - Exibir saldo da conta (poupança, corrente ou investimento)");
-			System.out.println("6 - Calcular tributos");
+			System.out.println("6 - Calcular tributos de uma conta de investimento");
 			System.out.println("7 - Calcular taxa de administração de uma conta de investimento");
 			System.out.println("0 - SAIR");
 			System.out.printf(">> ");

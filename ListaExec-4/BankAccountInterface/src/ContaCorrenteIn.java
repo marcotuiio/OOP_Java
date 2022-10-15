@@ -39,7 +39,7 @@ public class ContaCorrenteIn implements ContaBancariaIn {
 			BigDecimal aux = this.saldo.add(this.limite);
 			if (aux.compareTo(value) >= 0) {
 				this.saldo = this.saldo.subtract(value);
-				System.out.println("Saque utilizando limite de R$" + value + " realizado com sucesso");
+				System.out.println("Saque de R$" + value + " utilizando limite de realizado com sucesso");
 			} else {
 				System.out.println("Saldo e Limite insuficientes para realizar saque");
 			}
@@ -59,6 +59,7 @@ public class ContaCorrenteIn implements ContaBancariaIn {
 			}
 		}
 		System.out.println("Nenhuma conta com esse registro foi encontrada, encerrando procedimento\n");
+		System.exit(0);
 		return null; // erro não encontrou a conta
 	}
 
