@@ -14,6 +14,10 @@ public class ContaCorrenteIn implements ContaBancariaIn {
 		this.limite = lim;
 	}
 	
+	public ContaCorrenteIn() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getCliente() {
 		return cliente;
 	}
@@ -51,9 +55,9 @@ public class ContaCorrenteIn implements ContaBancariaIn {
 		this.saldo = this.saldo.add(value);
 	}
 	
-	static ContaCorrenteIn getAccount(ArrayList<ContaCorrenteIn> contas, String id) {
+	public ContaBancariaIn getAccount(ArrayList<ContaBancariaIn> contas, String id) {
 		
-		for (ContaCorrenteIn required : contas) {
+		for (ContaBancariaIn required : contas) {
 			if (required.getNumConta().equals(id)) {
 				return required;
 			}

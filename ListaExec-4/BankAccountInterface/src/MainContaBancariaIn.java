@@ -8,18 +8,15 @@ public class MainContaBancariaIn {
 		Scanner input = new Scanner(System.in);
 		int op = 1;
 		int type;
-		ContaCorrenteIn atualC = null;
-		ContaPoupancaIn atualP = null;
-		ContaInvestimentoIn atualI = null;
-		ArrayList<ContaCorrenteIn> corrente = new ArrayList<ContaCorrenteIn>();
-		ArrayList<ContaPoupancaIn> poupanca = new ArrayList<ContaPoupancaIn>();
-		ArrayList<ContaInvestimentoIn> invest = new ArrayList<ContaInvestimentoIn>();
-		// ArrayList<ContaBancariaIn> listaContas = new ArrayList<ContaBancariaIn>();
-		// ContaBancariaIn generic = null
+		ContaCorrenteIn cc = new ContaCorrenteIn();
+		ContaPoupancaIn cp = new ContaPoupancaIn();
+		ContaInvestimentoIn ci = new ContaInvestimentoIn();
+		ContaBancariaIn generic = null;
+		ArrayList<ContaBancariaIn> listaContas = new ArrayList<ContaBancariaIn>();
 		
 		System.out.println("--- Olá Cliente, bem vindo ao Banco de Westeros ---\n");
 		
-		while (op != 0 && op < 8) {
+		do {
 			System.out.println("\nInforme qual operação deseja realizar: ");
 			System.out.println("1 - Cadastrar conta (poupança, corrente ou investimento) ");
 			System.out.println("2 - Sacar um valor da sua conta (poupança, corrente ou investimento)");
@@ -31,6 +28,7 @@ public class MainContaBancariaIn {
 			System.out.println("0 - SAIR");
 			System.out.printf(">> ");
 			op = input.nextInt();
+			System.out.println();
 			
 			switch (op) {
 				case 1:
@@ -45,15 +43,15 @@ public class MainContaBancariaIn {
 						System.out.println("Informe o limite inicial da conta");
 						double lim = input.nextDouble();
 						ContaCorrenteIn novaC = new ContaCorrenteIn(name, conta, BigDecimal.valueOf(lim));
-						corrente.add(novaC);
+						listaContas.add(novaC);
 					} else if (type == 2) {
 						System.out.println("Informe o dia de rendimento da conta");
 						int dia = input.nextInt();
 						ContaPoupancaIn novaP = new ContaPoupancaIn(name, conta, dia);
-						poupanca.add(novaP);
+						listaContas.add(novaP);
 					} else {
 						ContaInvestimentoIn novaI = new ContaInvestimentoIn(name, conta);
-						invest.add(novaI);
+						listaContas.add(novaI);
 					}
 					
 					break;
@@ -61,37 +59,36 @@ public class MainContaBancariaIn {
 				case 2:
 					System.out.println("Informe o NÚMERO DA CONTA: ");
 					conta = input.next();
-					System.out.println("Informe o valor do sacar: ");
+					System.out.println("Informe o valor do saque: ");
 					double vSaque = input.nextDouble();  
 					System.out.println("Deseja sacar de conta CORRENTE (1), POUPANÇA (2), INVESTIMENTO (3)");
 					type = input.nextInt();
 					
 					if (type == 1) {
-						atualC = ContaCorrenteIn.getAccount(corrente, conta);
-						atualC.sacar(BigDecimal.valueOf(vSaque));
+						generic = cc.getAccount(listaContas, conta);
+						generic.sacar(BigDecimal.valueOf(vSaque));
 					} else if (type == 2) {
-						atualP = ContaPoupancaIn.getAccount(poupanca, conta);
-						atualP.sacar(BigDecimal.valueOf(vSaque));
+						generic = cp.getAccount(listaContas, conta);
+						generic.sacar(BigDecimal.valueOf(vSaque));
 					} else {
-						atualI = ContaInvestimentoIn.getAccount(invest, conta);
-						atualI.sacar(BigDecimal.valueOf(vSaque));
+						generic = ci.getAccount(listaContas, conta);
+						generic.sacar(BigDecimal.valueOf(vSaque));
 					}
-					
 					break;
 					
 				case 3:
 					System.out.println("Informe o NÚMERO DA CONTA: ");
 					conta = input.next();
-					System.out.println("Informe a porcentagem da taxa de rendimento: "); // passar um numero entro 1 e 100
+					System.out.println("Informe a porcentagem da taxa de rendimento(porcentagem entre 0 e 100): "); // passar um numero entro 1 e 100
 					double taxa = input.nextDouble();
-					System.out.println("Deseja depositar em conta POUPANÇA (2), INVESTIMENTO (3)");
+					System.out.println("Deseja calcular rendimento em conta POUPANÇA (2), INVESTIMENTO (3)");
 					type = input.nextInt();
 					if (type == 2) {
-						atualP = ContaPoupancaIn.getAccount(poupanca, conta);
-						((ContaPoupancaIn) atualP).calcularNovoSaldo(BigDecimal.valueOf(taxa));						
+						generic = cp.getAccount(listaContas, conta);
+						((ContaPoupancaIn) generic).calcularNovoSaldo(BigDecimal.valueOf(taxa));						
 					} else {
-						atualI = ContaInvestimentoIn.getAccount(invest, conta);
-						((ContaInvestimentoIn) atualI).calcularNovoSaldo(BigDecimal.valueOf(taxa));
+						generic = ci.getAccount(listaContas, conta);
+						((ContaInvestimentoIn) generic).calcularNovoSaldo(BigDecimal.valueOf(taxa));
 					}
 					break;	
 				
@@ -104,14 +101,14 @@ public class MainContaBancariaIn {
 					type = input.nextInt();
 					
 					if (type == 1) {
-						atualC = ContaCorrenteIn.getAccount(corrente, conta);
-						atualC.depositar(BigDecimal.valueOf(vDeposito));
+						generic = cc.getAccount(listaContas, conta);
+						generic.depositar(BigDecimal.valueOf(vDeposito));
 					} else if (type == 2) {
-						atualP = ContaPoupancaIn.getAccount(poupanca, conta);
-						atualP.depositar(BigDecimal.valueOf(vDeposito));
+						generic = cp.getAccount(listaContas, conta);
+						generic.depositar(BigDecimal.valueOf(vDeposito));
 					} else {
-						atualI = ContaInvestimentoIn.getAccount(invest, conta);
-						atualI.depositar(BigDecimal.valueOf(vDeposito));
+						generic = ci.getAccount(listaContas, conta);
+						generic.depositar(BigDecimal.valueOf(vDeposito));
 					}
 					break;
 					
@@ -122,15 +119,15 @@ public class MainContaBancariaIn {
 					type = input.nextInt();
 					
 					if (type == 1) {
-						atualC = ContaCorrenteIn.getAccount(corrente, conta);
-						System.out.printf("=> Conta Corrente " + conta +  " Saldo " + ((ContaCorrenteIn) atualC).getSaldo() + " Limite " + 
-											 ((ContaCorrenteIn) atualC).getLimite() + "\n");
+						generic = cc.getAccount(listaContas, conta);
+						System.out.printf("=> Conta Corrente " + conta +  " Saldo " + ((ContaCorrenteIn) generic).getSaldo() + " Limite " + 
+											 ((ContaCorrenteIn) generic).getLimite() + "\n");
 					} else if (type == 2) {
-						atualP = ContaPoupancaIn.getAccount(poupanca, conta);
-						System.out.printf("=> Conta Poupança " + conta +  " Saldo " + ((ContaPoupancaIn) atualP).getSaldo() + "\n");
+						generic = cp.getAccount(listaContas, conta);
+						System.out.printf("=> Conta Poupança " + conta +  " Saldo " + ((ContaPoupancaIn) generic).getSaldo() + "\n");
 					} else {
-						atualI = ContaInvestimentoIn.getAccount(invest, conta);
-						System.out.println("=> Conta Investimento " + conta + " Saldo " + ((ContaInvestimentoIn) atualI).getSaldo() + "\n");
+						generic = ci.getAccount(listaContas, conta);
+						System.out.println("=> Conta Investimento " + conta + " Saldo " + ((ContaInvestimentoIn) generic).getSaldo() + "\n");
 					}
 					break;
 					
@@ -139,8 +136,8 @@ public class MainContaBancariaIn {
 					conta = input.next();
 					System.out.println("Informe a porcentagem da taxa de rendimento: "); // passar um numero entro 1 e 100
 					double taxa1 = input.nextDouble();
-					atualI = ContaInvestimentoIn.getAccount(invest, conta);
-					/*BigDecimal tributo = */((ContaInvestimentoIn) atualI).calcularTributo(BigDecimal.valueOf(taxa1));
+					generic = ci.getAccount(listaContas, conta);
+					/*BigDecimal tributo = */((ContaInvestimentoIn) generic).calcularTributo(BigDecimal.valueOf(taxa1));
 					break;
 					
 				case 7:
@@ -148,14 +145,14 @@ public class MainContaBancariaIn {
 					conta = input.next();
 					System.out.println("Informe a porcentagem da taxa de rendimento: "); // passar um numero entro 1 e 100
 					double taxa2 = input.nextDouble();
-					atualI = ContaInvestimentoIn.getAccount(invest, conta);
-					((ContaInvestimentoIn) atualI).calcularTaxaAdministracao(BigDecimal.valueOf(taxa2));
+					generic = ci.getAccount(listaContas, conta);
+					((ContaInvestimentoIn) generic).calcularTaxaAdministracao(BigDecimal.valueOf(taxa2));
 					
 				default:
 					break;
 			}
 			
-		}
+		} while (op != 0 && op < 8);
 		
 		input.close();
 

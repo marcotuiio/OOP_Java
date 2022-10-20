@@ -13,6 +13,10 @@ public class ContaPoupancaIn implements ContaBancariaIn {
 		this.saldo = BigDecimal.ZERO;
 		this.diaRendimento = dR;
 	}
+	
+	public ContaPoupancaIn() {
+		
+	}
 
 	public String getCliente() {
 		return cliente;
@@ -34,6 +38,7 @@ public class ContaPoupancaIn implements ContaBancariaIn {
 	public void sacar(BigDecimal value) {
 		if (this.saldo.compareTo(value) >= 0) {
 			this.saldo = this.saldo.subtract(value);
+			System.out.println("Saque de R$" + value + " realizado com sucesso\n");
 		} else {
 			System.out.println("Saldo de R$" + this.saldo + " insuficiente para sacar R$" + value);
 		}
@@ -46,12 +51,13 @@ public class ContaPoupancaIn implements ContaBancariaIn {
 	
 	public void calcularNovoSaldo(BigDecimal taxa) {
 		BigDecimal rendimento = this.saldo.multiply(taxa).divide(BigDecimal.valueOf(100));
+		System.out.println("Rendimento de R$" + rendimento);
 		this.saldo = saldo.add(rendimento);
 	}
 	
-	static ContaPoupancaIn getAccount(ArrayList<ContaPoupancaIn> contas, String id) {
+	public ContaBancariaIn getAccount(ArrayList<ContaBancariaIn> contas, String id) {
 		
-		for (ContaPoupancaIn required : contas) {
+		for (ContaBancariaIn required : contas) {
 			if (required.getNumConta().equals(id)) {
 				return required;
 			}

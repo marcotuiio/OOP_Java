@@ -12,6 +12,10 @@ public class ContaInvestimentoIn implements ContaBancariaIn, Tributavel {
 		this.saldo = BigDecimal.ZERO;
 	}
 	
+	public ContaInvestimentoIn() {
+		
+	}
+	
 	public String getCliente() {
 		return cliente;
 	}
@@ -35,7 +39,8 @@ public class ContaInvestimentoIn implements ContaBancariaIn, Tributavel {
 	@Override
 	public void sacar(BigDecimal value) {
 		if (this.saldo.compareTo(value) >= 0) {
-			this.saldo.subtract(value);
+			this.saldo = this.saldo.subtract(value);
+			System.out.println("Saque de R$" + value + " realizado com sucesso\n");
 		} else {
 			System.out.println("Saldo de R$" + this.saldo + " insuficiente para sacar R$" + value);
 		}
@@ -48,6 +53,7 @@ public class ContaInvestimentoIn implements ContaBancariaIn, Tributavel {
 	
 	public void calcularNovoSaldo(BigDecimal taxa) {
 		BigDecimal rendimento = this.saldo.multiply(taxa).divide(BigDecimal.valueOf(100));
+		System.out.println("Rendimento de R$" + rendimento);
 		this.saldo = saldo.add(rendimento);
 	}
 	
@@ -57,9 +63,9 @@ public class ContaInvestimentoIn implements ContaBancariaIn, Tributavel {
 		System.out.println("Taxa de Administração R$" + tAdmin + " para " + taxa + "% e rendimento R$" + rendimento);
 	}
 	
-	static ContaInvestimentoIn getAccount(ArrayList<ContaInvestimentoIn> contas, String id) {
+	public ContaBancariaIn getAccount(ArrayList<ContaBancariaIn> contas, String id) {
 		
-		for (ContaInvestimentoIn required : contas) {
+		for (ContaBancariaIn required : contas) {
 			if (required.getNumConta().equals(id)) {
 				return required;
 			}
