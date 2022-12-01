@@ -11,7 +11,11 @@ public class Pessoas {
 	public boolean equals(Object o1) {
 		Pessoas that = (Pessoas) o1;
 		
-		return (this.nome.compareTo(that.nome) == 0 
-				&& this.cpf.compareTo(that.cpf) == 0); 
+		return (this.cpf.equals(that.cpf) 
+				&& this.nome.equals(that.nome)); 
+	}
+	
+	public int hashCode() {
+		return this.cpf.hashCode() + this.nome.hashCode();
 	}
 }
