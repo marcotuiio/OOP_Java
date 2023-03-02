@@ -1,0 +1,20 @@
+<h2>Produtos Favoritados</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Nome</th>
+    <th>Preço</th>
+    <th>Quantidade</th>
+    <th>Desfavoritar</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="produto : ${sessionFavoritos}">
+    <td th:text="${produto.nome}"></td>
+    <td th:text="${produto.preco}"></td>
+    <td th:text="${produto.quantidade}"></td>
+    <td><a th:href="@{/desfavoritar/{id}(id=${produto.id})}">Desfavoritar</a></td>
+  </tr>
+  </tbody>
+</table>
+<p><a href="/index">Listar todos os produtos</a></p>
