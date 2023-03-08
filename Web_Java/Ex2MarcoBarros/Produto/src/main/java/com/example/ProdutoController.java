@@ -63,7 +63,9 @@ public class ProdutoController {
 
         produtoRepository.delete(produto);
         HashSet<Produto> favoritos = (HashSet<Produto>) request.getSession().getAttribute(SESSION_FAVORITOS);
-        favoritos.remove(produto);
+        if (!CollectionUtils.isEmpty(favoritos)) {
+            favoritos.remove(produto);
+        }
 
         return "redirect:/index";
     }

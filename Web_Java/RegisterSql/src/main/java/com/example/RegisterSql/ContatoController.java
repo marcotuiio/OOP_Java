@@ -68,7 +68,8 @@ public class ContatoController {
                 .orElseThrow(() -> new IllegalArgumentException("O id do contato é inválido:" + id));
         contatoRepository.delete(contato);
         HashSet<Contato> favoritos = (HashSet<Contato>) request.getSession().getAttribute(SESSION_FAVORITOS);
-        favoritos.remove(contato);
+        if (!CollectionUtils.isEmpty(favoritos))
+            favoritos.remove(contato);
 
         return "redirect:/index";
     }
