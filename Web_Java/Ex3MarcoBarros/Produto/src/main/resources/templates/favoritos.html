@@ -1,0 +1,24 @@
+<h2>Produtos no Carrinho de Compras</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Nome</th>
+    <th>Preço</th>
+    <th>Quantidade</th>
+    <th>Adicionar mais um</th>
+    <th>Remover apenas um</th>
+    <th>Remover do carrinho</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="produtoCarrinho : ${sessionFavoritos}">
+    <td th:text="${produtoCarrinho.key.nome}"></td>
+    <td th:text="${produtoCarrinho.key.preco}"></td>
+    <td th:text="${produtoCarrinho.value.quantidade}"></td>
+    <td><a th:href="@{/addCarrinho/{id}(id=${produtoCarrinho.key.id})}">Add mais um</a></td>
+    <td><a th:href="@{/subCarrinho/{id}(id=${produtoCarrinho.key.id})}">Sub apenas um</a></td>
+    <td><a th:href="@{/desfavoritar/{id}(id=${produtoCarrinho.key.id})}">Remover do carrinho</a></td>
+  </tr>
+  </tbody>
+</table>
+<p><a href="/index">Listar todos os produtos</a></p>

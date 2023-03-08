@@ -1,0 +1,30 @@
+<div th:switch="${produtos}">
+  <h2 th:case="null">Ainda não há produtos!</h2>
+  <div th:case="*">
+    <h2>Produtos Ex3MarcoBarros</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Quantidade</th>
+        <th>Editar</th>
+        <th>Remover</th>
+        <th>Adicionar Carrinho de Compras</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="produto : ${produtos}">
+        <td th:text="${produto.nome}"></td>
+        <td th:text="${produto.preco}"></td>
+        <td th:text="${produto.quantidade}"></td>
+        <td><a th:href="@{/editar/{id}(id=${produto.id})}">Editar</a></td>
+        <td><a th:href="@{/remover/{id}(id=${produto.id})}">Remover</a></td>
+        <td><a th:href="@{/favoritar/{id}(id=${produto.id})}">Adicionar Carrinho de Compras</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <p><a href="/novo-produto">Adicionar um novo produto</a></p>
+  <p><a href="/favoritos">Exibir carrinhos de compras</a> </p>
+</div>
