@@ -1,0 +1,23 @@
+<body style="text-align: center">
+<h1>
+  Cadastre seu produto nessa excelente aplicação Spring com MySql Ex2
+</h1><br/>
+  <form style="text-align: center"
+        action="#"
+        th:action="@{/adicionar-produto}"
+        th:object="${produto}"
+        method="post">
+    <label for="nome">Nome: </label>
+    <input type="text" th:field="*{nome}" id="nome">
+    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+    <br/><br/>
+    <label for="preco">Preço:</label>
+    <input type="text" th:field="*{preco}" id="preco">
+    <br/><br/>
+    <label for="quantidade">Quantidade:</label>
+    <input type="text" th:field="*{quantidade}" id="quantidade">
+    <br/><br/>
+    <input type="submit" value="Adicionar">
+  </form>
+<p><a href="/index">Listar Produtos</a></p>
+</body>

@@ -1,0 +1,22 @@
+<body style="text-align: center">
+<h1>
+  Atualize seu produto nessa excelente aplicação Spring com MySql Ex2
+</h1><br/>
+  <form style="text-align: center"
+        action="#"
+        th:action="@{/atualizar/{id}(id=${produto.id})}"
+        th:object="${produto}"
+        method="post">
+    <label for="nome">Nome: </label>
+    <input type="text" th:field="*{nome}" id="nome">
+    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+    <br/><br/>
+    <label for="preco">Preço:</label>
+    <input type="number" th:field="*{preco}" id="preco">
+    <br/><br/>
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" th:field="*{quantidade}" id="quantidade">
+    <br/><br/>
+    <input type="submit" value="Adicionar">
+  </form>
+</body>
