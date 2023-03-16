@@ -1,5 +1,8 @@
 package com.example;
-public class ProdutoCarrinho {
+
+import java.io.Serializable;
+
+public class ProdutoCarrinho implements Serializable {
     private Produto produto;
     private int quantidade;
 
