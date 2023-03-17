@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
-public class Cardapio implements Serializable {
+public class Item_Cardapio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

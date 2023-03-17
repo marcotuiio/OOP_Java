@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="style_form.css">
+  <link rel="stylesheet" th:href="@{/static/style_form.css}">
   <title>Adicionar Cardápio</title>
 </head>
   <body style="text-align: center">
     <h2>CADASTRE O NOVO ITEM NO CARDÁPIO</h2>
       <form style="text-align: center"
             action="#"
-            th:action="@{/adicionar-item-cardapio}"
+            th:action="@{/adicionar-item-cardapio{id}(id=${idRest})}"
             th:object="${item_cardapio}"
             method="post">
         <label for="nome">Nome: </label>
