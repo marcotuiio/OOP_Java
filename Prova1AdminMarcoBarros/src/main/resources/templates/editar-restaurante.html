@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style_form.css">
+  <title>Editar Restaurante</title>
+</head>
+  <body style="text-align: center">
+    <h2>EDITAR RESTAURANTE</h2>
+      <form style="text-align: center"
+            action="#"
+            th:action="@{/atualizar-rest/{id}(id=${restaurante.id})}"
+            th:object="${restaurante}"
+            method="post">
+        <label for="nome">Nome: </label>
+        <input type="text" th:field="*{nome}" id="nome">
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+        <br/><br/>
+        <input type="submit" value="Editar">
+      </form>
+    <p><a href="/index" class="btn">Listar Restaurantes</a></p>
+  </body>
+</html>

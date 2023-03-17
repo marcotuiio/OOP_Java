@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style_index.css">
+  <title>Cardápio</title>
+</head>
+    <body>
+      <h2>Cardápio do Restaurante</h2>
+        <table class="table-card">
+          <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Editar</th>
+            <th>Remover</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="item_cardapio : ${cardapios}">
+            <td th:text="${item_cardapio.nome}"></td>
+            <td th:text="${item_cardapio.descricao}"></td>
+            <td th:text="${item_cardapio.preco}"></td>
+            <td><a class="btn-edit" th:href="@{/editar-cardapio/{id}(id=${item_cardapio.id})}">Editar</a></td>
+            <td><a class="btn-remove" th:href="@{/remover-cardapio/{id}(id=${item_cardapio.id})}">Remover</a></td>
+          </tr>
+          </tbody>
+        </table>
+      <p><a th:href="@{/novo-item-cardapio/{id}(id=${idRest})}" class="btn-add">Adicionar novo item ao cardápio</a></p>
+      <p><a href="/index" class="btn-edit">Listar Restaurantes</a></p>
+    </body>
+</html>
