@@ -1,0 +1,140 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-index {
+    align-content: center;
+    border-collapse: collapse;
+    width: 50%;
+    margin: auto;
+}
+
+.table-index th:first-child {
+    width: 70%;
+}
+
+.table-index th:nth-child(2) {
+    width: 30%;
+}
+
+.table-card th:first-child {
+    width: 20%;
+}
+
+.table-card th:nth-child(2) {
+    width: 25%;
+}
+
+.table-card th:nth-child(3) {
+    width: 15%;
+}
+
+.table-card th:nth-child(4),
+.table-card th:nth-child(5),
+.table-card th:nth-child(6),
+.table-card th:nth-child(7),
+.table-card th:nth-child(8) {
+    width: 8%;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #343a40;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #d1d1d1;
+}
+
+.center {
+    text-align: center;
+}
+
+.btn-add {
+    background-color: green;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: auto;
+}
+
+.btn-edit {
+    display: inline-block;
+    margin: 0 auto;
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-remove {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.btn-edit:hover, .btn-add:hover {
+    background-color: darkgreen;
+}
+
+.btn-edit:hover {
+    background-color: darkblue;
+}
+
+.btn-remove:hover {
+    background-color: darkred;
+}
+
+.nome-rest {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    font-size: 35px;
+    text-decoration: underline;
+    font-style: normal;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.total-price {
+    font-weight: bold;
+    font-size: 18px;
+    color: green;
+    border: 1px solid green;
+    padding: 5px;
+}

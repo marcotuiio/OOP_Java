@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/static/style_index.css}">
+  <title>Cardápio CONS</title>
+</head>
+    <body>
+        <h2>Cardápio do Restaurante: </h2>
+        <var class="nome-rest" th:text="${nomeRest}"> </var>
+        <br/><br/>
+            <table class="table-card">
+              <thead>
+              <tr>
+                  <th>Nome</th>
+                  <th>Descrição</th>
+                  <th>Preço</th>
+                  <th>Adicionar ao pedido</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="item_cardapio : ${cardapios}">
+                  <td th:text="${item_cardapio.nome}"></td>
+                  <td th:text="${item_cardapio.descricao}"></td>
+                  <td th:text="${item_cardapio.preco}"></td>
+                  <td><a class="btn-add" th:href="@{/adicionar-pedido/{id_rest}/{id_card}(id_rest=${item_cardapio.id_restaurante}, id_card=${item_cardapio.id})}">Adicionar ao pedido</a></td>
+              </tr>
+              </tbody>
+            </table>
+        <p><a href="/index" class="btn-edit">Listar Restaurantes</a></p>
+        <p><a href="/pedidos" class="btn-edit"> Listar pedidos</a></p>
+    </body>
+</html>

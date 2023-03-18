@@ -1,19 +1,19 @@
-package com.example.Prova1AdminMarcoBarros.Model;
-
+package com.example.Prova1ConsumidorMarcoBarros.Model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 
+import java.io.Serializable;
+
 @Entity
-public class Item_Cardapio {
+public class Item_Cardapio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank(message = "O nome é obrigatório")
     private String nome;
-//    @NotBlank(message = "O preço é obrigatório")
     private double preco;
     private String descricao;
     private int id_restaurante;
@@ -48,5 +48,18 @@ public class Item_Cardapio {
 
     public void setId_restaurante(int id_restaurante) {
         this.id_restaurante = id_restaurante;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == null || this.getClass() != o.getClass()) {
+            return false;
+        }
+        return ((Item_Cardapio)o).id == (this.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id * 12345;
     }
 }

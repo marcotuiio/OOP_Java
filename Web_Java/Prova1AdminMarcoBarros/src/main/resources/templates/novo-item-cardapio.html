@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" th:href="@{/static/style_form.css}">
-  <title>Adicionar Cardápio</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/static/style_form.css}">
+    <title>Adicionar Cardápio</title>
 </head>
-  <body style="text-align: center">
-    <h2>CADASTRE O NOVO ITEM NO CARDÁPIO</h2>
-      <form style="text-align: center"
-            action="#"
-            th:action="@{/adicionar-item-cardapio/{id}(id=${idRest})}"
-            th:object="${item_cardapio}"
-            method="post">
-        <label for="nome">Nome: </label>
-        <input type="text" th:field="*{nome}" id="nome">
-<!--        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>-->
-        <br/><br/>
-        <label for="descricao">Descrição: </label>
-        <input type="text" th:field="*{descricao}" id="descricao">
-<!--        <span th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>-->
-        <br/><br/>
-        <label for="preco">Preço: </label>
-        <input type="text" th:field="*{preco}" id="preco">
-<!--        <span th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"></span>-->
-        <br/><br/>
-        <input type="submit" value="Adicionar">
-      </form>
-    <p><a th:href="@{/cardapio-rest/{id}(id=${idRest})}" class="btn">Voltar para cardápio</a></p>
-    <p><a href="/index" class="btn">Listar Restaurantes</a></p>
-  </body>
+    <body style="text-align: center">
+        <h2>CADASTRE O NOVO ITEM NO CARDÁPIO</h2>
+            <form style="text-align: center"
+                  action="#"
+                  th:action="@{/adicionar-item-cardapio/{id}(id=${idRest})}"
+                  th:object="${item_cardapio}"
+                  method="post">
+                <label for="nome">Nome: </label>
+                <input type="text" th:field="*{nome}" id="nome">
+                <!--        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>-->
+                <br/><br/>
+                <label for="descricao">Descrição: </label>
+                <input type="text" th:field="*{descricao}" id="descricao">
+                <!--        <span th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>-->
+                <br/><br/>
+                <label for="preco">Preço: </label>
+                <input type="text" th:field="*{preco}" id="preco">
+                <!--        <span th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"></span>-->
+                <br/><br/>
+                <input type="submit" value="Adicionar">
+            </form>
+        <p><a th:href="@{/cardapio-rest/{id}(id=${idRest})}" class="btn">Voltar para cardápio</a></p>
+        <p><a href="/index" class="btn">Listar Restaurantes</a></p>
+    </body>
 </html>

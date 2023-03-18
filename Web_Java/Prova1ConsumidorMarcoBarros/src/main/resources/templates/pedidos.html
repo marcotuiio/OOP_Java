@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/static/style_index.css}">
+  <title>Pedidos</title>
+</head>
+    <body>
+        <h2>Lista de Pedidos</h2>
+            <table class="table-card">
+              <thead>
+              <tr>
+                  <th>Restaurante</th>
+                  <th>Item do Cardápio</th>
+                  <th>Descrição</th>
+                  <th>Preço</th>
+                  <th>Quantidade</th>
+                  <th>Adicionar mais</th>
+                  <th>Remover um</th>
+                  <th>Excluir</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="item_pedido : ${sessionPedidos}">
+                  <td th:text="${item_pedido.value.nomeRestaurante}"></td>
+                  <td th:text="${item_pedido.key.nome}"></td>
+                  <td th:text="${item_pedido.key.descricao}"></td>
+                  <td th:text="${item_pedido.key.preco}"></td>
+                  <td th:text="${item_pedido.value.quantidade}"></td>
+                  <td><a class="btn-add" th:href="@{/adicionar-pedido/{id_rest}/{id_card}(id_rest=${item_pedido.key.id_restaurante}, id_card=${item_pedido.key.id})}">ADD</a></td>
+                  <td><a class="btn-remove" th:href="@{/sub-pedido/{id_rest}/{id_card}(id_rest=${item_pedido.key.id_restaurante}, id_card=${item_pedido.key.id})}">SUB</a></td>
+                  <td><a class="btn-remove" th:href="@{/remover-pedido/{id_rest}/{id_card}(id_rest=${item_pedido.key.id_restaurante}, id_card=${item_pedido.key.id})}">DEL</a></td>
+              </tr>
+              </tbody>
+            </table>
+        <br></br>
+        <label> ==> PREÇO TOTAL DO PEDIDO: </label>
+        <var class="total-price" th:text="${precoTotal}"></var>
+        <br></br>
+        <p><a href="/index" class="btn-edit">Listar Restaurantes</a></p>
+    </body>
+</html>

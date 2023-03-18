@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/static/style_index.css}">
-    <title>Lista de Restaurantes ADM</title>
+    <title>Lista de Restaurantes CONS</title>
 </head>
     <body>
-        <h2>Restaurantes PROVA1 ADMIN MarcoBarros</h2>
+        <h2>Restaurantes PROVA1 CONSUMIDOR MarcoBarros</h2>
             <table class="table-index">
                 <thead>
                 <tr>
                     <th>Nome</th>
                     <th>Cardápio</th>
-                    <th>Editar</th>
-                    <th>Remover</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="restaurante : ${restaurantes}">
                     <td th:text="${restaurante.nome}"></td>
                     <td><a class="btn-edit" th:href="@{/cardapio-rest/{id}(id=${restaurante.id})}">Cardapio</a></td>
-                    <td><a class="btn-edit" th:href="@{/editar-rest/{id}(id=${restaurante.id})}">Editar</a></td>
-                    <td><a class="btn-remove" th:href="@{/remover-rest/{id}(id=${restaurante.id})}">Remover</a></td>
                 </tr>
                 </tbody>
             </table>
-        <p><a href="/novo-restaurante" class="btn-add">Cadastrar novo restaurante</a></p>
+        <div class="center">
+            <p><a href="/pedidos" class="btn-add" >Exibir Pedidos</a></p>
+        </div>
     </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" th:href="@{/static/style_index.css}">
-  <title>Cardápio</title>
+  <title>Cardápio ADM</title>
 </head>
     <body>
       <h2>Cardápio do Restaurante: </h2>
@@ -12,20 +12,20 @@
       <table class="table-card">
           <thead>
           <tr>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-            <th>Editar</th>
-            <th>Remover</th>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Preço</th>
+              <th>Editar</th>
+              <th>Remover</th>
           </tr>
           </thead>
           <tbody>
           <tr th:each="item_cardapio : ${cardapios}">
-            <td th:text="${item_cardapio.nome}"></td>
-            <td th:text="${item_cardapio.descricao}"></td>
-            <td th:text="${item_cardapio.preco}"></td>
-            <td><a class="btn-edit" th:href="@{/editar-cardapio/{id_rest}/{id_card}(id_rest=${item_cardapio.id_restaurante}, id_card=${item_cardapio.id})}">Editar</a></td>
-            <td><a class="btn-remove" th:href="@{/remover-cardapio/{id_rest}/{id_card}(id_rest=${item_cardapio.id_restaurante}, id_card=${item_cardapio.id})}">Remover</a></td>
+              <td th:text="${item_cardapio.nome}"></td>
+              <td th:text="${item_cardapio.descricao}"></td>
+              <td th:text="${item_cardapio.preco}"></td>
+              <td><a class="btn-edit" th:href="@{/editar-cardapio/{id_rest}/{id_card}(id_rest=${item_cardapio.id_restaurante}, id_card=${item_cardapio.id})}">Editar</a></td>
+              <td><a class="btn-remove" th:href="@{/remover-cardapio/{id_rest}/{id_card}(id_rest=${item_cardapio.id_restaurante}, id_card=${item_cardapio.id})}">Remover</a></td>
           </tr>
           </tbody>
         </table>
