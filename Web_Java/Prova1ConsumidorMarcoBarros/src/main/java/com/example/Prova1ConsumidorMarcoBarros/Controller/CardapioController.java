@@ -11,13 +11,14 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class CardapioController {
     private static final String SESSION_PEDIDOS = "sessionPedidos";
-    private static final String PRECO_PEDIDOS = "precoTotal";
+    private static final String PRECO_PEDIDOS = "precoPedidos";
     @Autowired
     Item_CardapioRepository cardapioRepository;
     @Autowired
@@ -31,11 +32,14 @@ public class CardapioController {
         Item_Cardapio item_cardapio = cardapioRepository.findById(id_card)
                 .orElseThrow(() -> new IllegalArgumentException("O id do cardapio é inválido:" + id_card));
 
+        clearSessionTrash(request);
+
         HashMap<Item_Cardapio, Item_Pedido> pedidos =
                 (HashMap<Item_Cardapio, Item_Pedido>) request.getSession().getAttribute(SESSION_PEDIDOS);
         if (pedidos == null) {
             pedidos = new HashMap<>();
         }
+
 
         Item_Pedido item_pedido = pedidos.get(item_cardapio);
         if (item_pedido == null) {
@@ -55,6 +59,7 @@ public class CardapioController {
     @GetMapping("/sub-pedido/{id_rest}/{id_card}")
     public String subUmPedido(@PathVariable("id_rest") int id_rest, @PathVariable("id_card") int id_card,
                                   HttpServletRequest request) {
+        clearSessionTrash(request);
         Item_Cardapio item_cardapio = cardapioRepository.findById(id_card)
                 .orElseThrow(() -> new IllegalArgumentException("O id do cardapio é inválido:" + id_card));
 
@@ -80,6 +85,7 @@ public class CardapioController {
     @GetMapping("/remover-pedido/{id_rest}/{id_card}")
     public String removerPedido(@PathVariable("id_rest") int id_rest, @PathVariable("id_card") int id_card,
                                 HttpServletRequest request) {
+        clearSessionTrash(request);
         Item_Cardapio item_cardapio = cardapioRepository.findById(id_card)
                 .orElseThrow(() -> new IllegalArgumentException("O id do cardapio é inválido:" + id_card));
 
@@ -98,18 +104,21 @@ public class CardapioController {
 
     @GetMapping("/pedidos")
     public String mostrarPedidos(Model model, HttpServletRequest request) {
-        HashMap<Item_Cardapio, Item_Pedido> favoritos =
+        HashMap<Item_Cardapio, Item_Pedido> pedidos =
                 (HashMap<Item_Cardapio, Item_Pedido>) request.getSession().getAttribute(SESSION_PEDIDOS);
-        double precoTotal = (double) request.getSession().getAttribute(PRECO_PEDIDOS);
-        model.addAttribute("precoTotal", precoTotal);
+        clearSessionTrash(request);
+        double precoTotal = calculatePreco(pedidos);
+        request.getSession().setAttribute(PRECO_PEDIDOS, precoTotal);
+        model.addAttribute("precoPedidos", precoTotal);
         model.addAttribute("sessionPedidos",
-                !CollectionUtils.isEmpty(favoritos) ? favoritos : new HashMap<>());
+                !CollectionUtils.isEmpty(pedidos) ? pedidos : new HashMap<>());
 
         return "pedidos";
     }
 
     public double calculatePreco(HashMap<Item_Cardapio, Item_Pedido> pedidos) {
         double total = 0;
+        if (pedidos == null) { return total; }
         for (Map.Entry<Item_Cardapio, Item_Pedido> mapElement : pedidos.entrySet()) {
             Item_Pedido item_pedido = mapElement.getValue();
             Item_Cardapio item_cardapio = mapElement.getKey();
@@ -120,5 +129,28 @@ public class CardapioController {
             total = quantidade * preco + total;
         }
         return total;
+    }
+
+    public void clearSessionTrash(HttpServletRequest request) {
+        HashMap<Item_Cardapio, Item_Pedido> pedidos =
+                (HashMap<Item_Cardapio, Item_Pedido>) request.getSession().getAttribute(SESSION_PEDIDOS);
+
+        if (pedidos == null) {
+            return;
+        }
+
+        HashMap<Item_Cardapio, Item_Pedido> pedidosValidos = new HashMap<>();
+
+        for (Map.Entry<Item_Cardapio, Item_Pedido> entry : pedidos.entrySet()) {
+            Item_Cardapio itemCardapio = entry.getKey();
+            Restaurante restaurante = restauranteRepository.findById(itemCardapio.getId_restaurante()).orElse(null);
+            Item_Cardapio itemBanco = cardapioRepository.findById(itemCardapio.getId()).orElse(null);
+
+            if (restaurante != null && itemBanco != null) {
+                pedidosValidos.put(itemCardapio, entry.getValue());
+            }
+        }
+
+        request.getSession().setAttribute(SESSION_PEDIDOS, pedidosValidos);
     }
 }

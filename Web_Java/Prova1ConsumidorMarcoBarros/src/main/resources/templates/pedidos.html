@@ -7,7 +7,7 @@
 </head>
     <body>
         <h2>Lista de Pedidos</h2>
-            <table class="table-card">
+            <table class="table-pedido">
               <thead>
               <tr>
                   <th>Restaurante</th>
@@ -15,7 +15,7 @@
                   <th>Descrição</th>
                   <th>Preço</th>
                   <th>Quantidade</th>
-                  <th>Adicionar mais</th>
+                  <th>Adicionar um</th>
                   <th>Remover um</th>
                   <th>Excluir</th>
               </tr>
@@ -34,9 +34,11 @@
               </tbody>
             </table>
         <br></br>
-        <label> ==> PREÇO TOTAL DO PEDIDO: </label>
-        <var class="total-price" th:text="${precoTotal}"></var>
-        <br></br>
-        <p><a href="/index" class="btn-edit">Listar Restaurantes</a></p>
+        <div class="center">
+            <label> ==> PREÇO TOTAL DO PEDIDO: </label>
+            <var class="total-price" th:text= "${precoPedidos}"></var>
+            <br></br>
+            <p><a href="/index" class="btn-list">Listar Restaurantes</a></p>
+        </div>
     </body>
 </html>

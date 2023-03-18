@@ -17,12 +17,12 @@
                 <tbody>
                 <tr th:each="restaurante : ${restaurantes}">
                     <td th:text="${restaurante.nome}"></td>
-                    <td><a class="btn-edit" th:href="@{/cardapio-rest/{id}(id=${restaurante.id})}">Cardapio</a></td>
+                    <td><a class="btn-list" th:href="@{/cardapio-rest/{id}(id=${restaurante.id})}">Cardápio</a></td>
                 </tr>
                 </tbody>
             </table>
         <div class="center">
-            <p><a href="/pedidos" class="btn-add" >Exibir Pedidos</a></p>
+            <p><a href="/pedidos" class="btn-edit" >Listar Pedidos</a></p>
         </div>
     </body>
 </html>
