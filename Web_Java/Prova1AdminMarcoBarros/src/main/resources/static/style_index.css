@@ -103,3 +103,15 @@ tr:hover {
     background-color: darkred;
 }
 
+.nome-rest {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    font-size: 35px;
+    text-decoration: underline;
+    font-style: normal;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+

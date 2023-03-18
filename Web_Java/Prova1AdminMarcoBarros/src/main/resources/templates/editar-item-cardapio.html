@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" th:href="@{/static/style_form.css}">
@@ -9,20 +9,20 @@
     <h2>EDITAR ITEM NO CARDÁPIO</h2>
       <form style="text-align: center"
             action="#"
-            th:action="@{/atualizar-cardapio/{id}(id=${item_cardapio.id})}"
+            th:action="@{/atualizar-cardapio/{id_rest}/{id_card}(id_rest=${idRest}, id_card=${idCard})}"
             th:object="${item_cardapio}"
             method="post">
         <label for="nome">Nome: </label>
         <input type="text" th:field="*{nome}" id="nome">
-        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+<!--        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>-->
         <br/><br/>
-        <label for="nome">Descrição: </label>
-        <label for="descricao"></label><input type="text" th:field="*{descricao}" id="descricao">
-        <span th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>
+        <label for="descricao">Descrição: </label>
+        <input type="text" th:field="*{descricao}" id="nome">
+<!--        <span th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>-->
         <br/><br/>
-        <label for="nome">Preço: </label>
-        <label for="preco"></label><input type="text" th:field="*{preco}" id="preco">
-        <span th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"></span>
+        <label for="preco">Preço: </label>
+        <input type="text" th:field="*{preco}" id="nome">
+<!--        <span th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"></span>-->
         <br/><br/>
         <input type="submit" value="Editar">
       </form>

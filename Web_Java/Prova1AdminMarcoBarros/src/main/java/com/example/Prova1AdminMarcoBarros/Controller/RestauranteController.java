@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 @Controller
 public class RestauranteController {
-    private static final String SESSION_CARDAPIOS = "sessionCardapios";
     @Autowired
     RestauranteRepository restauranteRepository;
     @Autowired
@@ -69,11 +68,9 @@ public class RestauranteController {
                     return new IllegalArgumentException("O id do restaurante é inválido:" + id);
                 });
         ArrayList<Item_Cardapio> cardapios = (ArrayList<Item_Cardapio>) cardapioRepository.findAll();
-        if (!cardapios.isEmpty()) {
-            for (Item_Cardapio c : cardapios) {
-                if (c.getId_restaurante() == id) {
-                    cardapios.remove(c);
-                }
+        for (Item_Cardapio c : cardapios) {
+            if (c.getId_restaurante() == id) {
+                cardapioRepository.delete(c);
             }
         }
         restauranteRepository.delete(restaurante);
@@ -82,12 +79,13 @@ public class RestauranteController {
 
     @GetMapping("/cardapio-rest/{id}")
     public String mostrarCardapioRestaurante(@PathVariable("id") int id, Model model) {
+
         ArrayList<Item_Cardapio> cardapios = (ArrayList<Item_Cardapio>) cardapioRepository.findAll();
-        if (!cardapios.isEmpty()) {
-            for (Item_Cardapio c : cardapios) {
-                if (c.getId_restaurante() != id) {
-                    cardapios.remove(c);
-                }
+        ArrayList<Item_Cardapio> cardapio_restaurant = new ArrayList<>();
+
+        for (Item_Cardapio c : cardapios) {
+            if (c.getId_restaurante() == id) {
+                cardapio_restaurant.add(c);
             }
         }
 
@@ -96,55 +94,62 @@ public class RestauranteController {
                     return new IllegalArgumentException("O id do restaurante é inválido:" + id);
                 });
 
-        model.addAttribute("cardapios", cardapios);
+        model.addAttribute("cardapios", cardapio_restaurant);
         model.addAttribute("idRest", id);
         model.addAttribute("nomeRest", restaurante.getNome());
         return "cardapio";
     }
 
-    @GetMapping("/novo-item-cardapio/{id_rest}")
-    public String mostrarFormNovoItemCardapio(@PathVariable("id_rest") int id, Item_Cardapio cardapio, Model model) {
+    @GetMapping("/novo-item-cardapio/{id}")
+    public String mostrarFormNovoItemCardapio(@PathVariable("id") int id, Model model) {
         model.addAttribute("idRest", id);
+        model.addAttribute("item_cardapio", new Item_Cardapio());
         return "novo-item-cardapio";
     }
 
     @PostMapping("/adicionar-item-cardapio/{id}")
-    public String adicionarItemCardapio(@PathVariable("id_rest") int id, @Valid Item_Cardapio cardapio, BindingResult result) {
+    public String adicionarItemCardapio(@PathVariable("id") int id, @Valid Item_Cardapio item_cardapio, BindingResult result) {
         if (result.hasErrors()) { return "novo-item-cardapio"; }
-        cardapio.setId_restaurante(id);
-        cardapioRepository.save(cardapio);
-        return "redirect:/novo-item-cardapio";
+        item_cardapio.setId_restaurante(id);
+        cardapioRepository.save(item_cardapio);
+        return "redirect:/novo-item-cardapio/{id}";
     }
 
-    @GetMapping("/editar-cardapio/{id}")
-    public String mostrarFormEditarCardapio(@PathVariable("id") int id, Model model) {
-        Item_Cardapio cardapio = cardapioRepository.findById(id).
+    @GetMapping("/editar-cardapio/{id_rest}/{id_card}")
+    public String mostrarFormEditarCardapio(@PathVariable("id_rest") int id_rest, @PathVariable("id_card") int id_card,
+                                            Model model) {
+        Item_Cardapio item_cardapio = cardapioRepository.findById(id_card).
                 orElseThrow(() -> {
-                    return new IllegalArgumentException("O id do cardapio é inválido:" + id);
+                    return new IllegalArgumentException("O id do item_cardapio é inválido:" + id_card);
                 });
-        model.addAttribute("item_cardapio", cardapio);
+        model.addAttribute("idCard", item_cardapio.getId());
+        model.addAttribute("idRest", item_cardapio.getId_restaurante());
+        model.addAttribute("item_cardapio", item_cardapio);
         return "editar-item-cardapio";
     }
 
-    @PostMapping("/atualizar-cardapio/{id}")
-    String atualizarCardapio(@PathVariable("id") int id, @Valid Item_Cardapio cardapio,
-                             BindingResult result, Model model) {
+    @PostMapping("/atualizar-cardapio/{id_rest}/{id_card}")
+    String atualizarCardapio(@PathVariable("id_rest") int id_rest, @PathVariable("id_card") int id_card,
+                             @Valid Item_Cardapio item_cardapio, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            cardapio.setId(id);
+            item_cardapio.setId(id_card);
             return "editar-item-cardapio";
         }
-        cardapioRepository.save(cardapio);
-        return "redirect:/cardapio";
+        item_cardapio.setId(id_card);
+        item_cardapio.setId_restaurante(id_rest);
+        cardapioRepository.save(item_cardapio);
+        return "redirect:/cardapio-rest/" + id_rest;
     }
 
-    @GetMapping("/remove-cardapio/{id}")
-    public String removerCardapio(@PathVariable("id") int id, HttpServletRequest request) {
-        Item_Cardapio cardapio = cardapioRepository.findById(id).
+    @GetMapping("/remover-cardapio/{id_rest}/{id_card}")
+    public String removerCardapio(@PathVariable("id_rest") int id_rest, @PathVariable("id_card") int id_card,
+                                  HttpServletRequest request) {
+        Item_Cardapio item_cardapio = cardapioRepository.findById(id_card).
                 orElseThrow(() -> {
-                    return new IllegalArgumentException("O id do cardápio é inválido:" + id);
+                    return new IllegalArgumentException("O id do item_cardápio é inválido:" + id_card);
                 });
-        cardapioRepository.delete(cardapio);
-        return "redirect:/cardapio";
+        cardapioRepository.delete(item_cardapio);
+        return "redirect:/cardapio-rest/" + id_rest;
     }
 
 }

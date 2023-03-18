@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" th:href="@{/static/style_index.css}">
   <title>Cardápio</title>
 </head>
     <body>
-      <h2>Cardápio do Restaurante </h2>
-      <var th:text="${nomeRest}"> </var>
+      <h2>Cardápio do Restaurante: </h2>
+      <var class="nome-rest" th:text="${nomeRest}"> </var>
+      <br/><br/>
       <table class="table-card">
           <thead>
           <tr>
@@ -23,8 +24,8 @@
             <td th:text="${item_cardapio.nome}"></td>
             <td th:text="${item_cardapio.descricao}"></td>
             <td th:text="${item_cardapio.preco}"></td>
-            <td><a class="btn-edit" th:href="@{/editar-cardapio/{id}(id=${item_cardapio.id})}">Editar</a></td>
-            <td><a class="btn-remove" th:href="@{/remover-cardapio/{id}(id=${item_cardapio.id})}">Remover</a></td>
+            <td><a class="btn-edit" th:href="@{/editar-cardapio/{id_rest}/{id_card}(id_rest=${item_cardapio.id_restaurante}, id_card=${item_cardapio.id})}">Editar</a></td>
+            <td><a class="btn-remove" th:href="@{/remover-cardapio/{id_rest}/{id_card}(id_rest=${item_cardapio.id_restaurante}, id_card=${item_cardapio.id})}">Remover</a></td>
           </tr>
           </tbody>
         </table>

@@ -15,7 +15,7 @@ public class Item_Cardapio implements Serializable {
     private int id;
     @NotBlank(message = "O nome é obrigatório")
     private String nome;
-    @NotBlank(message = "O preço é obrigatório")
+//    @NotBlank(message = "O preço é obrigatório")
     private double preco;
     private String descricao;
     private int id_restaurante;
